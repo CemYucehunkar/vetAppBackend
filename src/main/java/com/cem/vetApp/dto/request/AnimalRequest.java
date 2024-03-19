@@ -1,6 +1,7 @@
 package com.cem.vetApp.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 public class AnimalRequest {
     @NotBlank
+
     private String name;
 
     @NotBlank
@@ -29,7 +31,9 @@ public class AnimalRequest {
     @NotBlank
     private String color;
 
+    @NotNull
     private LocalDate dateOfBirth;
 
+    @NotNull
     private CustomerInDtoRequest customer;
 }

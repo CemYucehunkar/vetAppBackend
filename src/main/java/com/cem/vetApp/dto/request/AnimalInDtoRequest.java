@@ -32,8 +32,10 @@ public class AnimalInDtoRequest {
     @NotBlank
     private String color;
 
+    @NotBlank
     private LocalDate dateOfBirth;
 
     @Positive
+    @NotBlank
     private Long customerId;
 }

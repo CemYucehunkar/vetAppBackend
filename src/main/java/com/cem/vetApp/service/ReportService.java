@@ -67,7 +67,7 @@ public class ReportService implements BaseService<Report, ReportRequest, ReportR
             Report doesReportExist = getById (id);
 
             modelMapperService.forRequest ().map (reportRequest, doesReportExist);
-
+            doesReportExist.setId (id);
             return modelMapperService
                     .forResponse ()
                     .map (reportRepository.save (doesReportExist), ReportResponse.class);
