@@ -15,22 +15,22 @@ import static com.cem.vetApp.config.BaseURL.BASE_URL;
 @RequiredArgsConstructor
 public class DoctorController {
     private final DoctorService doctorService;
-
+// Burada DoctorController sınıfı oluşturuldu ve bu sınıfın bir örneği oluşturuldu. Bu sınıf, DoctorService sınıfı ile işlem yapar.
     @GetMapping
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<> (doctorService.getAllResponses (), HttpStatus.OK);
     }
-
+// Burada getAll metodu oluşturuldu ve bu metod, doctorService sınıfının getAllResponses metodunu çağırır. Bu metod, tüm doktorların bilgilerini döndürür.
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<> (doctorService.getResponseById (id), HttpStatus.OK);
     }
-
+// Burada getById metodu oluşturuldu ve bu metod, doctorService sınıfının getResponseById metodunu çağırır. Bu metod, belirli bir doktorun bilgilerini döndürür.
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody DoctorRequest doctorRequest) {
         return new ResponseEntity<> (doctorService.create (doctorRequest), HttpStatus.CREATED);
     }
-
+//
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
             @PathVariable("id") Long id,
@@ -38,7 +38,7 @@ public class DoctorController {
     ) {
         return new ResponseEntity<> (doctorService.update (id, doctorRequest), HttpStatus.ACCEPTED);
     }
-
+//  Burada update metodu oluşturuldu ve bu metod, doctorService sınıfının update metodunu çağırır. Bu metod, belirli bir doktoru günceller.
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
         doctorService.deleteById (id);

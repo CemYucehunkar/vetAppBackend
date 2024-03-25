@@ -63,15 +63,21 @@ public class AnimalService implements BaseService<Animal, AnimalRequest, AnimalR
 
     @Override
     public AnimalResponse update (Long id , AnimalRequest animalRequest)
-        {
-            Animal doesAnimalExist = getById (id);
+    {
+        Animal doesAnimalExist = getById (id);
+        Animal animal = modelMapperService
+                .forRequest ()
+                .map (animalRequest, Animal.class);
 
-            modelMapperService.forRequest ().map (animalRequest, doesAnimalExist);
+        modelMapperService
+                .forRequest ()
+                .map (animal, doesAnimalExist);
+        doesAnimalExist.setId (id);
 
-            return modelMapperService
-                    .forResponse ()
-                    .map (animalRepository.save (doesAnimalExist), AnimalResponse.class);
-        }
+        return modelMapperService
+                .forResponse ()
+                .map (animalRepository.save (doesAnimalExist), AnimalResponse.class);
+    }
 
     @Override
     public void deleteById (Long id)

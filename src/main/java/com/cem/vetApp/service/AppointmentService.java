@@ -4,6 +4,7 @@ import com.cem.vetApp.config.BaseService;
 import com.cem.vetApp.config.ModelMapperService;
 import com.cem.vetApp.dto.request.AppointmentRequest;
 import com.cem.vetApp.dto.response.AppointmentResponse;
+import com.cem.vetApp.dto.response.DoctorResponse;
 import com.cem.vetApp.entity.Appointment;
 import com.cem.vetApp.entity.AvailableDate;
 import com.cem.vetApp.repository.AppointmentRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Optional;
 
 @Service

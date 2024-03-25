@@ -65,15 +65,41 @@ public class AvailableDateService implements BaseService<AvailableDate, Availabl
 
     @Override
     public AvailableDateResponse update (Long id , AvailableDateRequest availableDateRequest)
-        {
-            AvailableDate doesAvailableDateExist = getById (id);
-
-            modelMapperService.forRequest ().map (availableDateRequest, doesAvailableDateExist);
-
-            return modelMapperService
-                    .forResponse ()
-                    .map (availableDateRepository.save (doesAvailableDateExist), AvailableDateResponse.class);
+    {
+        Optional<AvailableDate> availableDateIdDB=availableDateRepository.findById(id);
+        Optional<AvailableDate> isAvailableDateExist=availableDateRepository.findByDoctorIdAndAvailableDate(availableDateRequest.getDoctor().getId(),availableDateRequest.getAvailableDate());
+        if (availableDateIdDB.isEmpty()){
+            throw new EntityNotFoundException("AvailableDate with ID" + id + " not found");
         }
+        if(isAvailableDateExist.isPresent()){
+            throw new  EntityNotFoundException("Doctor is not available on this date");
+        }
+
+        AvailableDate updatedAvailableDate=availableDateIdDB.get();
+        updatedAvailableDate.setAvailableDate(availableDateRequest.getAvailableDate());
+        updatedAvailableDate.setDoctor(availableDateRequest.getDoctor());// bu hatayı nasıl düzeltebilirim
+        // updatedAvailableDate.setDoctor(availableDateRequest.getDoctor().getId());
+        return modelMapperService.forResponse().map(availableDateRepository.save(updatedAvailableDate),AvailableDateResponse.class);
+
+
+
+
+
+      /*  AvailableDate doesAvailableDateExist = getById (id);
+        AvailableDate availableDate = modelMapperService
+                .forRequest ()
+                .map (availableDateRequest, AvailableDate.class);
+
+        modelMapperService
+                .forRequest ()
+                .map (availableDate, doesAvailableDateExist);
+        doesAvailableDateExist.setId (id);
+
+        return modelMapperService
+                .forResponse ()
+                .map (availableDateRepository.save (doesAvailableDateExist), AvailableDateResponse.class);*/
+    }
+
 
     @Override
     public void deleteById (Long id)

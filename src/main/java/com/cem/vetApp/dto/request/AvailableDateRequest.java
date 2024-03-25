@@ -1,5 +1,6 @@
 package com.cem.vetApp.dto.request;
 
+import com.cem.vetApp.entity.Doctor;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -16,5 +17,5 @@ import java.time.LocalDate;
 public class AvailableDateRequest {
     private LocalDate availableDate;
 
-    private DoctorInDtoRequest doctor;
+    private Doctor doctor;
 }
